@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Pagination, Spinner, Container } from 'react-bootstrap';
-import Header from '../src/components/header/Header';
-import Footer from '../src/components/footer/Footer';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -24,7 +24,7 @@ function App() {
 
   }, []);
 
-  const columns = ['userId', 'id', 'title', 'completed'];
+  const columns = ['ID', 'User', 'Título', 'Terminado'];
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const renderData = data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
   const handleFirstPage = () => setCurrentPage(1);
@@ -45,13 +45,13 @@ function App() {
         )}
         {!mostrarCargando && (
           <>
+          
             <Table striped bordered hover size="sm">
               <thead>
                 <tr>
-                  <td>ID</td>
-                  <td>Usuario</td>
-                  <td>Título</td>
-                  <td>Estado</td>
+                  {columns.map((column) => (
+                    <th key={column}>{column}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
@@ -59,8 +59,15 @@ function App() {
                   <tr key={item.id}>
                     <td>{item.id}</td>
                     <td>{item.userId}</td>
-                    <td>{item.title}</td>
-                    <td>{item.completed.toString()}</td>
+                    <td className='text-start'>{item.title}</td>
+                    <td>
+                      {item.completed ? (
+                        <input className="form-check-input" type="checkbox" value="" checked disabled />
+                      ) : (
+                        <input className="form-check-input" type="checkbox" value="" disabled />
+                      )}
+                    </td>
+
                   </tr>
                 ))}
               </tbody>
@@ -76,6 +83,7 @@ function App() {
               <Pagination.Next onClick={handleNextPage} />
               <Pagination.Last onClick={handleLastPage} />
             </Pagination>
+
           </>
         )}
       </div>
