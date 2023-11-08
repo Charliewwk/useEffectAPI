@@ -12,12 +12,16 @@ function App() {
   const [mostrarCargando, setMostrarCargando] = useState(true);
 
   useEffect(() => {
+    console.log("1 iniciando fetch...")
     fetch('https://jsonplaceholder.typicode.com/todos')
       .then((res) => res.json())
       .then((data) => {
         setData(data);
         setMostrarCargando(false);
+        console.log("2 fetch finalizado")
       });
+    console.log("3 código asincrónico")
+
   }, []);
 
   const columns = ['userId', 'id', 'title', 'completed'];
