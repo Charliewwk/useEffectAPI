@@ -41,7 +41,6 @@ function App() {
         )}
         {!mostrarCargando && (
           <>
-            <Container>
             <Table striped bordered hover size="sm">
               <thead>
                 <tr>
@@ -73,7 +72,6 @@ function App() {
               <Pagination.Next onClick={handleNextPage} />
               <Pagination.Last onClick={handleLastPage} />
             </Pagination>
-            </Container>
           </>
         )}
       </div>
